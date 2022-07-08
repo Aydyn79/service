@@ -49,14 +49,66 @@ class Obj(models.Model):
 
 class ProcessPlant(models.Model):
 
+    PLANT_TYPES = [
+
+        ('oilPmpPlt', 'Установка перекачки нефти'),
+        ('oilPipeln', 'Трубопровод нефти'),
+        ('blockKPSt', 'Блочная комплектная насосная станция'),
+        ('instPDWat', 'Установка предварительного сброса воды'),
+        ('operBuild', 'Здание операторной'),
+        ('auxSystem', 'Вспомогательная система'),
+        ('techPlatf', 'Технологическая площадка'),
+        ('technUnit', 'Технологический блок'),
+        ('comprStat', 'Компрессорная станция'),
+        ('tankFarmS', 'Резервуарный парк'),
+        ('separator', 'Сепарационная группа'),
+        ('gasBullit', 'Газовый сепаратор'),
+        ('gasOilBul', 'Нефтегазовый сепаратор'),
+        ('drainCpct', 'Дренажная ёмкость'),
+        ('instalInc', 'Установка сепарационная трубная наклонная'),
+        ('torchHigh', 'Факел высокого давления'),
+        ('torchLowP', 'Факел низкого давления'),
+        ('oilMetUnt', 'Узел учёта нефти'),
+        ('oilPumpin', 'Насосная нефти'),
+        ('waterPump', 'Насосная воды'),
+        ('operatHMI', 'АРМ оператора'),
+        ('serverPCS', 'сервер АСУТП'),
+        ('hardwUnit', 'Аппаратурный блок'),
+        ('boxAutomn', 'Шкаф автоматики'),
+    ]
+
     obj = models.ForeignKey(Obj, on_delete=models.CASCADE)
     name = models.CharField(max_length=200, blank=False, null=False)
     status = models.BooleanField(default=True, verbose_name='Состояние эксплуатации')
-    type = models.CharField(max_length=200, blank=False, null=False)
+    type = models.CharField(max_length=9, choices=PLANT_TYPES)
     description = models.CharField(max_length=200)
 
 
 class Device(models.Model):
+    DEVICE_TYPES = [
+        ('operBuild', 'Здание операторной'),
+        ('auxSystem', 'Вспомогательная система'),
+        ('techPlatf', 'Технологическая площадка'),
+        ('technUnit', 'Технологический блок'),
+        ('comprStat', 'Компрессорная станция'),
+        ('tankFarmS', 'Резервуарный парк'),
+        ('separator', 'Сепарационная группа'),
+        ('gasBullit', 'Газовый сепаратор'),
+        ('gasOilBul', 'Нефтегазовый сепаратор'),
+        ('drainCpct', 'Дренажная ёмкость'),
+        ('instalInc', 'Установка сепарационная трубная наклонная'),
+        ('torchHigh', 'Факел высокого давления'),
+        ('torchLowP', 'Факел низкого давления'),
+        ('oilMetUnt', 'Узел учёта нефти'),
+        ('oilPumpin', 'Насосная нефти'),
+        ('waterPump', 'Насосная воды'),
+        ('operatHMI', 'АРМ оператора'),
+        ('serverPCS', 'сервер АСУТП'),
+        ('hardwUnit', 'Аппаратурный блок'),
+        ('boxAutomn', 'Шкаф автоматики'),
+    ]
+
+    unit_types = models.CharField(max_length=9, choices=DEVICE_TYPES)
     obj = models.ForeignKey(Obj, on_delete=models.CASCADE)
     name = models.CharField(max_length=200, blank=False, null=False)
     chief = models.CharField(max_length=200)
